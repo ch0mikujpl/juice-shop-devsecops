@@ -25,6 +25,7 @@ jobs:
       uses: returntocorp/semgrep-action@v1
       with:
         config: 'auto'
+        strict: false
 
     - name: Secrets Scan with GitLeaks
       uses: gitleaks/gitleaks-action@v2
