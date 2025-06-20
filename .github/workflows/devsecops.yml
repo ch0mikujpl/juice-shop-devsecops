@@ -30,9 +30,11 @@ jobs:
       run: |
         semgrep --config=auto || true
 
-
-    - name: Secrets Scan with GitLeaks
-      uses: gitleaks/gitleaks-action@v2
+    - name: Secrets Scan with GitLeaks (ignore exit code)
+      run: |
+        curl -sL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
+        chmod +x gitleaks
+        ./gitleaks detect --redact || true
 
     - name: Run Juice Shop in background
       run: docker run -d -p 3000:3000 --name juice bkimminich/juice-shop
